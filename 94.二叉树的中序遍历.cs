@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 /*
  * @lc app=leetcode.cn id=94 lang=csharp
  *
@@ -41,17 +42,21 @@
  * }
  */
 public class Solution {
-    List<int> ans = new List<int>();
     public IList<int> InorderTraversal(TreeNode root) {
-        Helper(root);
+        List<int> ans = new List<int>();
+        var stack = new Stack<TreeNode>();
+        while(root != null || stack.Any()) {
+            while(root != null) {
+                stack.Push(root);
+                root = root.left;
+            }
+            root = stack.Pop();
+            ans.Add(root.val);
+            root = root.right;
+        }
         return ans;
     }
-    private void Helper(TreeNode root) {
-        if(root == null) return;
-        Helper(root.left);
-        ans.Add(root.val);
-        Helper(root.right);
-    }
+    
 }
 // @lc code=end
 
