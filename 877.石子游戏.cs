@@ -54,15 +54,16 @@ using System;
 public class Solution {
     public bool StoneGame(int[] piles) {
         int n = piles.Length;
-        if(Helper(piles, 0, n - 1, new int?[n, n]) >= 0) return true;
-        return false;
-    }
-    public int Helper(int[] piles, int start, int end, int?[, ] dp) {
-        if(dp[start, end] != null) return dp[start, end].Value;
-        if(start == end) return piles[start];
-        int ans = Math.Max(piles[start] - Helper(piles, start + 1, end, dp), piles[end] - Helper(piles, start, end - 1, dp));
-        dp[start, end] = ans;
-        return ans;
+        var dp = new int[n,n];
+        for(int i = 0;i<n;i++) {
+            dp[i, i] = piles[i];
+        }
+        for(int i = n -1;i>= 0;i--) {
+            for(int j = i + 1;j<n;j++) {
+                dp[i, j] = Math.Max(piles[i] -dp[i + 1, j], piles[j] -dp[i, j - 1]);
+            }
+        }
+        return dp[0, n -1] > 0;
     }
 }
 // @lc code=end
