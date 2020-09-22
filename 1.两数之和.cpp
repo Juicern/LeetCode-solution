@@ -1,6 +1,7 @@
-#include<iostream>
+#include <iostream>
 #include <vector>
-#include<map>
+#include <map>
+#include<set>
 using namespace std;
 /*
  * @lc app=leetcode.cn id=1 lang=cpp
@@ -34,23 +35,22 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        map<int, int> a;
-        vector<int> b(2, -1);
-        for (int i = 0;i<nums.size();i++) {
-            a[nums[i]] = i;
-        }
-        for(int i = 0;i<nums.size();i++) {
-            if(a.count(target - nums[i]) > 0 && (a[target - nums[i]] != i)){ 
-                b[0] = i;
-                b[1] = a[target - nums[i]];
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+        map<int, int> map;
+        vector<int> ans(2, -1);
+        for(int i=  0;i<nums.size();i++) {
+            if(map.count(target - nums[i]) > 0) {
+                ans[0] = i;
+                ans[1] = map[target - nums[i]]; 
                 break;
             }
+            map[nums[i]] = i;
         }
-        return b;
+        return ans;
     }
 };
 // @lc code=end
-
