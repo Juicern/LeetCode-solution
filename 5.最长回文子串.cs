@@ -1,3 +1,4 @@
+using System;
 /*
  * @lc app=leetcode.cn id=5 lang=csharp
  *
@@ -33,22 +34,26 @@
 // @lc code=start
 public class Solution {
     public string LongestPalindrome(string s) {
-        int n = s.Length;
-        var dp = new bool[n, n];
-        string ans = "";
-        for(int j = 0;j<n;j++) {
-            for(int i = 0;i<=j;i++) {
-                if(j - i == 0) dp[i, j] = true;
-                else if(j - i == 1) dp[i, j] = s[i] == s[j];
-                else {
-                    dp[i, j] = s[i] == s[j] && dp[i + 1, j - 1];
-                }
-                if(dp[i, j] && j - i + 1 > ans.Length) {
-                    ans = s.Substring(i, j - i + 1);
-                }
+        if(s == null || s.Length == 0) return "";
+        int start = 0;
+        int end = 0;
+        for (int i = 0;i<s.Length;i++) {
+            int len1 = ExpendAroundCenter(s, i, i);
+            int len2 = ExpendAroundCenter(s, i, i + 1);
+            int len = Math.Max(len1, len2);
+            if(len> end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
         }
-        return ans;
+        return s.Substring(start, end + 1);
+    }
+    public int ExpendAroundCenter(string s, int left, int right) {
+        while(left >= 0 && right < s.Length && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return right - left  - 1;
     }
 }
 // @lc code=end
