@@ -1,5 +1,5 @@
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 using namespace std;
 /*
  * @lc app=leetcode.cn id=5 lang=cpp
@@ -34,25 +34,33 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    string longestPalindrome(string s) {
+    string longestPalindrome(string s)
+    {
         int n = s.size();
         vector<vector<int>> dp(n, vector<int>(n));
         string ans;
-        for(int left = 0;left < n;left++) {
-            for(int i = 0;i + left < n;i++) {
+        for (int left = 0; left < n; left++)
+        {
+            for (int i = 0; i + left < n; i++)
+            {
                 int j = i + left;
-                if(left == 0) {
+                if (left == 0)
+                {
                     dp[i][j] = 1;
                 }
-                else if(left == 1) {
+                else if (left == 1)
+                {
                     dp[i][j] = (s[i] == s[j]);
                 }
-                else {
+                else
+                {
                     dp[i][j] = (s[i] == s[j] && dp[i + 1][j - 1]);
                 }
-                if(dp[i][j] && left + 1> ans.size()) {
+                if (dp[i][j] && left + 1 > ans.size())
+                {
                     ans = s.substr(i, left + 1);
                 }
             }
@@ -61,4 +69,3 @@ public:
     }
 };
 // @lc code=end
-
