@@ -39,41 +39,44 @@
 
 // @lc code=start
 class Solution {
-    public double findMedianSortedArrays(int[] A, int[] B) {
-        int m = A.length;
-        int n = B.length;
-        if (m > n) { // to ensure m<=n
-            int[] temp = A; A = B; B = temp;
-            int tmp = m; m = n; n = tmp;
-        }
-        int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if (m > n)
+            return findMedianSortedArrays(nums2, nums1);
+        int iMin = 0;
+        int iMax = m;
         while (iMin <= iMax) {
             int i = (iMin + iMax) / 2;
-            int j = halfLen - i;    //i增大,j缩小
-            if (i < iMax && B[j-1] > A[i]){
-                iMin = i + 1; // i is too small
-            }
-            else if (i > iMin && A[i-1] > B[j]) {
-                iMax = i - 1; // i is too big
-            }
-            else { // i is perfect
-                int maxLeft = 0;
-                if (i == 0) { maxLeft = B[j-1]; }
-                else if (j == 0) { maxLeft = A[i-1]; }
-                else { maxLeft = Math.max(A[i-1], B[j-1]); }
-                if ( (m + n) % 2 == 1 ) { return maxLeft; }
-
-                int minRight = 0;
-                if (i == m) { minRight = B[j]; }
-                else if (j == n) { minRight = A[i]; }
-                else { minRight = Math.min(B[j], A[i]); }
-
-                return (maxLeft + minRight) / 2.0;
+            int j = (m + n + 1) / 2 - i;
+            if (i != 0 && j != n && nums1[i - 1] > nums2[j]) {
+                iMax = i - 1;
+            } else if (j != 0 && i != m && nums2[j - 1] > nums1[i]) {
+                iMin = i + 1;
+            } else {
+                int left = 0;
+                if (i == 0) {
+                    left = nums2[j - 1];
+                } else if (j == 0) {
+                    left = nums1[i - 1];
+                } else {
+                    left = Math.max(nums1[i - 1], nums2[j - 1]);
+                }
+                if ((m + n) % 2 == 1)
+                    return left;
+                int right = 0;
+                if (i == m) {
+                    right = nums2[j];
+                } else if (j == n) {
+                    right = nums1[i];
+                } else {
+                    right = Math.min(nums1[i], nums2[j]);
+                }
+                return (left + right) / 2.0;
             }
         }
-        return 0.0;
+        return 0;
     }
 }
 
 // @lc code=end
-
