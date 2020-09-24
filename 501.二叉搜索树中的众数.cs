@@ -52,29 +52,35 @@ using System.Reflection.Emit;
  *     public TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+public class Solution
+{
     int bases;
     int count;
     int maxCount;
     List<int> ans = new List<int>();
-    public int[] FindMode(TreeNode root) {
+    public int[] FindMode(TreeNode root)
+    {
         TreeNode cur = root;
         TreeNode pre = null;
-        while(cur != null) {
-            if(cur.left == null) {
+        while (cur != null)
+        {
+            if (cur.left == null)
+            {
                 update(cur.val);
                 cur = cur.right;
                 continue;
             }
             pre = cur.left;
-            while(pre.right != null && pre.right != cur) {
+            while (pre.right != null && pre.right != cur)
+            {
                 pre = pre.right;
             }
-            if(pre.right == null) {
+            if (pre.right == null)
+            {
                 pre.right = cur;
-                cur =cur.left;
+                cur = cur.left;
             }
-            else 
+            else
             {
                 pre.right = null;
                 update(cur.val);
@@ -83,16 +89,20 @@ public class Solution {
         }
         return ans.ToArray();
     }
-    public void update(int x) {
-        if(x == bases) count++;
-        else {
+    public void update(int x)
+    {
+        if (x == bases) count++;
+        else
+        {
             count = 1;
             bases = x;
         }
-        if(count == maxCount) {
+        if (count == maxCount)
+        {
             ans.Add(bases);
         }
-        if(count > maxCount) {
+        if (count > maxCount)
+        {
             maxCount = count;
             ans.Clear();
             ans.Add(bases);
