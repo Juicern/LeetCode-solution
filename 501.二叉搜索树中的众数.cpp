@@ -64,27 +64,24 @@ public:
         TreeNode *pre = nullptr;
         while (cur)
         {
-            if (!cur->left)
-            {
+            if(!cur->left) {
                 update(cur->val);
                 cur = cur->right;
-                continue;
             }
-            pre = cur->left;
-            while (pre->right && pre->right != cur)
-            {
-                pre = pre->right;
-            }
-            if (!pre->right)
-            {
-                pre->right = cur;
-                cur = cur->left;
-            }
-            else
-            {
-                pre->right = nullptr;
-                update(cur->val);
-                cur = cur->right;
+            else {
+                pre= cur->left;
+                while(pre->right && pre->right != cur) {
+                    pre = pre->right;
+                }
+                if(!pre->right){
+                    pre->right = cur;
+                    cur = cur->left;
+                }
+                else {
+                    pre->right = nullptr;
+                    update(cur->val);
+                    cur = cur->right;
+                }
             }
         }
         return ans;
