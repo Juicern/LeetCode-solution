@@ -81,11 +81,7 @@ public class Solution {
                 cur = cur.right;
             }
         }
-        var mode = new int[ans.Count];
-        for(int i = 0;i<ans.Count;i++) {
-            mode[i] = ans[i];
-        }
-        return mode;
+        return ans.ToArray();
     }
     public void update(int x) {
         if(x == bases) count++;
