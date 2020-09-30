@@ -1,3 +1,6 @@
+#include<vector>
+#include<unordered_map>
+using namespace std;
 /*
  * @lc app=leetcode.cn id=956 lang=cpp
  *
@@ -56,17 +59,17 @@
 class Solution {
 public:
     int tallestBillboard(vector<int>& rods) {
-        unordered_map<int, int> dp;
-        dp[0] = 0;
-        for (int x : rods) {
-            unordered_map<int, int> cur(dp);
-            for (auto it: cur) {
-                int d = it.first;
-                dp[d + x] = max(dp[d + x],cur[d]);
-                dp[abs(d - x)] = max(dp[abs(d - x)], cur[d] + min(d, x));
+        unordered_map<int, int> map;
+        map[0] = 0;
+        for(auto rod :rods) {
+            unordered_map<int, int> tmp(map);
+            for(auto it : tmp) {
+                int key = it.first;
+                map[key + rod] = max(map[key + rod], tmp[key] + rod);
+                map[key - rod] = max(map[key - rod], tmp[key]);
             }
         }
-        return dp[0];
+        return map[0];
     }
 };
 // @lc code=end
