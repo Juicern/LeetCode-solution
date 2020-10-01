@@ -46,18 +46,22 @@ using System.Collections.Generic;
  */
 
 // @lc code=start
-public class Solution {
+public class Solution
+{
     Queue<int> ans = new Queue<int>();
-    public int[] NumsSameConsecDiff(int n, int k) {
-        for(int i = 1;i<=9;i++) ans.Enqueue(i);
+    public int[] NumsSameConsecDiff(int n, int k)
+    {
+        for (int i = 1; i <= 9; i++) ans.Enqueue(i);
         int count = 1;
-        while(count < n) {
+        while (count < n)
+        {
             int size = ans.Count;
-            for(int i = 0;i<size;i++){
+            for (int i = 0; i < size; i++)
+            {
                 int num = ans.Dequeue();
                 int last = num % 10;
-                if(last + k < 10) ans.Enqueue(num * 10 + last + k);
-                if(k != 0 && last - k >=0) ans.Enqueue(num * 10 + last - k);
+                if (last + k < 10) ans.Enqueue(num * 10 + last + k);
+                if (k != 0 && last - k >= 0) ans.Enqueue(num * 10 + last - k);
             }
             count++;
         }
