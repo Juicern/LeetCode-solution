@@ -88,7 +88,6 @@ const sumOfDistancesInTree = (N, edges) => {
 
     postOrder(0, -1); // dfs的入口。因为N>=1，节点0肯定存在，就从节点0开始搜
     preOrder(0, -1);
-    console.log(distSum);
     return distSum;
 };
 // @lc code=end
