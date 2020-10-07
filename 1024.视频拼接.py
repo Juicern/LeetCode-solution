@@ -84,7 +84,7 @@ class Solution:
         for clip in clips:
             dp[clip[0]] = max(dp[clip[0]], clip[1])
         for i in range(T):
-            mx = max(dp[i], mx)
+            mx = max(mx, dp[i])
             if i== pre :
                 pre = mx
                 ans += 1
