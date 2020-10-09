@@ -82,28 +82,24 @@
  * @param {number} T
  * @return {number}
  */
-var videoStitching = function(clips, T) {
-    const n = clips.length;
-    
-    clips.sort((a, b) => a[0] - b[0]);
-    
-    let stitching_start = 0;
-    let stitching_end = 0;
-    let videos_used = 0;
-    let index = 0;
-    
-    while (stitching_start < T) {
-        while (index < n && clips[index][0] <= stitching_start) { // find the longest video that starts before our stitching_start
-            stitching_end = Math.max(stitching_end, clips[index][1]);
-            index++;
-        }
-        if (stitching_start == stitching_end) return -1; // made no advancement
-        
-        videos_used++;
-        stitching_start = stitching_end;
+var videoStitching = function (clips, T) {
+    let dp = new Array(101);
+    let ans = 0;
+    let pre = 0;
+    let max = 0;
+    for(let i = 0;i<dp.length;i++) dp[i] =0;
+    for (let i = 0;i<clips.length;i++) {
+        dp[clips[i][0]] = Math.max(dp[clips[i][0]], clips[i][1]);
     }
-    
-    return videos_used;
+    for (let i = 0; i < T; i++) {
+        max = Math.max(max, dp[i]);
+        if (i === pre) {
+            pre = max;
+            ans++;
+        }
+        if (i === max) return -1;
+    }
+    return ans;
 };
 // @lc code=end
 
