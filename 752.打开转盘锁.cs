@@ -75,25 +75,32 @@ using System.Security;
  */
 
 // @lc code=start
-public class Solution {
-    public int OpenLock(string[] deadends, string target) {
+public class Solution
+{
+    public int OpenLock(string[] deadends, string target)
+    {
         var seen = new HashSet<string>();
-        foreach(var d in deadends) seen.Add(d);
-        if(seen.Contains("0000")) return -1; 
+        foreach (var d in deadends) seen.Add(d);
+        if (seen.Contains("0000")) return -1;
         var queue = new Queue<string>();
         queue.Enqueue("0000");
         seen.Add("0000");
         int ans = 0;
-        while(queue.Any()) {
+        while (queue.Any())
+        {
             int size = queue.Count;
-            for(int k = 0;k<size;k++) {
+            for (int k = 0; k < size; k++)
+            {
                 var node = queue.Dequeue();
-                if(node.Equals(target)) return ans;
-                for(int i =0;i<4;i++) {
-                    for (int d = -1;d<=1;d+=2) {
+                if (node.Equals(target)) return ans;
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int d = -1; d <= 1; d += 2)
+                    {
                         int digit = ((node[i] - '0') + d + 10) % 10;
                         string nei = node.Substring(0, i) + digit + node.Substring(i + 1);
-                        if(!seen.Contains(nei)) {
+                        if (!seen.Contains(nei))
+                        {
                             seen.Add(nei);
                             queue.Enqueue(nei);
                         }
