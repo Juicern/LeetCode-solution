@@ -53,17 +53,29 @@
  * }
  */
 public class NestedIterator {
+    Queue<int> queue;
 
     public NestedIterator(IList<NestedInteger> nestedList) {
-        
+        queue = new Queue<int>();
+        Dfs(nestedList);
     }
 
     public bool HasNext() {
-        
+        return queue.Any();
     }
 
     public int Next() {
-        
+        return queue.Dequeue();
+    }
+    public void Dfs(IList<NestedInteger> nestedList) {
+        foreach(var num in nestedList) {
+            if(num.IsInteger()) {
+                queue.Enqueue(num.GetInteger());
+            }
+            else{
+                Dfs(num.GetList());
+            }
+        }
     }
 }
 
