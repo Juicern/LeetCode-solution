@@ -91,7 +91,7 @@ public class LFUCache {
                 Node node = freq_table[minFreq].Last();
                 key_table.Remove(node.key);
                 freq_table[minFreq].RemoveLast();
-                if(freq_table[minFreq].Count == 0) {
+                if(!freq_table[minFreq].Any()) {
                     freq_table.Remove(minFreq);
                 }
             }
@@ -109,7 +109,7 @@ public class LFUCache {
             if(!freq_table[freq].Any()){
                 freq_table.Remove(freq);
                 if(minFreq == freq){
-                    minFreq += 1;
+                    minFreq ++;
                 }
             }
             if(!freq_table.ContainsKey(freq + 1)) freq_table.Add(freq + 1, new LinkedList<Node>());
