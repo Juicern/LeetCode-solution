@@ -40,7 +40,7 @@ public class Solution {
         var ans = new List<int[]>();
         foreach(var person in people) ans.Insert(person[1], person);
         return ans.ToArray();
-    }
+    }          
 }
 // @lc code=end
 
