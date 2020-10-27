@@ -86,15 +86,17 @@ public class Solution
                 res += current - start + 1;
                 index++;
             }
-            else if(dict.Keys.Count > K){
+            else if (dict.Keys.Count > K)
+            {
                 //We should start at the next left number
                 //else the sum of diffrent numbers will be over K
                 //So try to remove the left number 
                 //to make the sum equals to K
-                while(dict.Keys.Count > K){
+                while (dict.Keys.Count > K)
+                {
                     dict.Remove(A[current++]);
-                    start = current;
                 }
+                start = current;
                 dict.Remove(A[index]);
             }
             else index++;
