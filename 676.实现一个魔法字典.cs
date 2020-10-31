@@ -42,30 +42,37 @@ using System.Collections.Generic;
  */
 
 // @lc code=start
-public class MagicDictionary {
+public class MagicDictionary
+{
     Dictionary<int, List<string>> dict;
 
     /** Initialize your data structure here. */
-    public MagicDictionary() {
+    public MagicDictionary()
+    {
         dict = new Dictionary<int, List<string>>();
     }
-    
-    public void BuildDict(string[] dictionary) {
-        foreach(var word in dictionary) {
-            if(!dict.ContainsKey(word.Length)) dict.Add(word.Length, new List<string>());
+
+    public void BuildDict(string[] dictionary)
+    {
+        foreach (var word in dictionary)
+        {
+            if (!dict.ContainsKey(word.Length)) dict.Add(word.Length, new List<string>());
             dict[word.Length].Add(word);
         }
     }
-    
-    public bool Search(string searchWord) {
-        if(!dict.ContainsKey(searchWord.Length)) return false;
-        foreach(var word in dict[searchWord.Length]) {
+
+    public bool Search(string searchWord)
+    {
+        if (!dict.ContainsKey(searchWord.Length)) return false;
+        foreach (var word in dict[searchWord.Length])
+        {
             int count = 0;
-            for(int i = 0;i<word.Length;i++) {
-                if(word[i] != searchWord[i]) count++;
-                if(count >=2 ) break;
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i] != searchWord[i]) count++;
+                if (count >= 2) break;
             }
-            if(count == 1) return true;
+            if (count == 1) return true;
         }
         return false;
     }
