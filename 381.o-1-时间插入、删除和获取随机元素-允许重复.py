@@ -52,6 +52,7 @@
 
  
 # @lc code=start
+
 class RandomizedCollection:
     def __init__(self):
         self.d = collections.defaultdict(set)
