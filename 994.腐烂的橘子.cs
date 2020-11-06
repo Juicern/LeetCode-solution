@@ -63,53 +63,48 @@ using System.Collections.Generic;
  */
 
 // @lc code=start
-public class Solution
-{
-    int[] dir_x = new int[] { 0, 0, 1, -1 };
-    int[] dir_y = new int[] { 1, -1, 0, 0 };
-    public int OrangesRotting(int[][] grid)
-    {
-
-        var freshFruits = new Queue<(int, int)>();
-        for (int i = 0; i < grid.Length; i++)
-        {
-            for (int j = 0; j < grid[0].Length; j++)
-            {
-                if (grid[i][j] == 1){
-                    if(IsIsolated(grid, i, j)) return -1;
-                    freshFruits.Enqueue((i, j));
+public class Solution {
+    public int OrangesRotting(int[][] grid) {
+        Queue<int[]> q = new Queue<int[]>();
+        for(int i=0;i<grid.Length;++i){
+            for(int j=0;j<grid[i].Length;++j){
+                if(grid[i][j] == 2)
+                    q.Enqueue(new int[] {i,j});
+            }
+        }        
+        
+        int[][] dirs = new int[4][];
+        dirs[0] = new int[] { 0,  1};
+        dirs[1] = new int[] { 0, -1};
+        dirs[2] = new int[] { 1,  0};
+        dirs[3] = new int[] { -1, 0};
+        
+        int mins = 0;
+        while(q.Count > 0){
+            int cnt = q.Count;
+            for(int i=0;i<cnt;++i){
+                int[] cell = q.Dequeue();
+                foreach(int[] d in dirs){
+                    int row = cell[0] + d[0];
+                    int col = cell[1] + d[1];
+                    if(row >= 0 && col >= 0 && row < grid.Length && col < grid[0].Length && grid[row][col] == 1){
+                        q.Enqueue(new int[]{row, col});
+                        grid[row][col] = 2;
+                    }
                 }
             }
+            if(q.Count > 0)
+                mins++;
         }
-        int ans = 0;
-        while(freshFruits.Any()) {
-            int count = freshFruits.Count;
-            for(int i =0; i<count;i++) {
-                var (x, y) = freshFruits.Dequeue();
-                if(IsIsolated(grid, x, y)) {
-                    grid[x][y] = 2;
-                }
-                else freshFruits.Enqueue((x, y));
+        
+        for(int i=0;i<grid.Length;++i){
+            for(int j=0;j<grid[i].Length;++j){
+                if(grid[i][j] == 1)
+                    return -1;
             }
-            ans++;
         }
-        return ans;
-    }
-    public bool IsIsolated(int[][] grid, int x, int y) {
-        for(int i = 0;i<4;i++) {
-            int new_x = x + dir_x[i];
-            int new_y = y + dir_y[i];
-            if(new_x >= 0 && new_x < grid.Length && new_y >= 0 && new_y < grid[0].Length && grid[new_x][new_y] != 0) return false;
-        }
-        return true;
-    }
-    public bool IsPolluted(int[][] grid, int x, int y){
-        for(int i = 0;i<4;i++) {
-            int new_x = x + dir_x[i];
-            int new_y = y + dir_y[i];
-            if(new_x >= 0 && new_x < grid.Length && new_y >= 0 && new_y < grid[0].Length && grid[new_x][new_y] == 2) return true;
-        }
-        return false;
+        
+        return mins;   
     }
 }
 // @lc code=end
