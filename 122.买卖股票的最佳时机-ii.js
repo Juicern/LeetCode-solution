@@ -71,4 +71,3 @@ var maxProfit = function(prices) {
     return dp[0];
 };
 // @lc code=end
-
