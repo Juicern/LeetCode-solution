@@ -36,26 +36,33 @@
  */
 
 // @lc code=start
-public class Solution {
-    public int MaxProduct(string[] words) {
-        int max=0;
-        for (int i = 0; i < words.Length; i++)
+public class Solution 
+{
+    public int NthSuperUglyNumber(int n, int[] primes) 
+    {
+        var result = new int[n];
+        result[0] = 1;
+        var primeIndexs = new int[primes.Length];
+        for(int i =1; i<n; i++)
         {
-            for (int k = i+1; k < words.Length; k++)
-            {      
-                if (i!=k)
-                {   
-                    var m = words[i].Distinct(); 
-                    var n = words[k].Distinct();
-                    var lm = m.Intersect(n).Any();
-                    if(!lm){
-                        max= Math.Max(max,words[i].Length*words[k].Length);
-                    }
+            var tempResult = new int[primes.Length];
+            for(int j = 0; j < primeIndexs.Length; j++)
+            {
+                var primeIndex = primeIndexs[j];
+                tempResult[j] = result[primeIndex] * primes[j];
+            }
+            var min  = tempResult.Min();
+            for(int j = 0; j < tempResult.Length; j++)
+            {
+                if (tempResult[j] == min)
+                {
+                    primeIndexs[j]++;
                 }
             }
-        }      
-        return max;
-    }   
+            result[i] = min;
+        }
+        return result[n-1];
+    }
 }
 // @lc code=end
 
