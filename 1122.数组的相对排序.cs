@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 /*
  * @lc app=leetcode.cn id=1122 lang=csharp
@@ -48,21 +49,11 @@ using System.Collections.Generic;
 // @lc code=start
 public class Solution {
     public int[] RelativeSortArray(int[] arr1, int[] arr2) {
-        var ans = new int[arr1.Length];
-        var dic = new SortedDictionary<int, int>();
-        foreach(var num in arr1) {
-            if(!dic.ContainsKey(num)) dic.Add(num, 0);
-            dic[num]++;
+        var dict = new Dictionary<int, int>();
+        for(int i = 0;i<arr2.Length;i++) {
+            dict.Add(arr2[i], i);
         }
-        int index = 0;
-        foreach(var key in arr2) {
-            for(int i=0;i<dic[key];i++) ans[index++] = key;
-            dic.Remove(key);
-        }
-        foreach(var key in dic.Keys) {
-            for(int i=0;i<dic[key];i++) ans[index++] = key;
-        }
-        return ans;
+        return arr1.OrderBy(x => dict.ContainsKey(x) ? dict[x] : x + 1001).ToArray();
     }
 }
 // @lc code=end
