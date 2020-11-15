@@ -50,23 +50,23 @@
 
 // @lc code=start
 function removeKdigits(num: string, k: number): string {
-    let stack : number[] = [];
-    for(let digit of num) {
-        while(stack.length > 0 && k > 0 && stack[stack.length - 1] > +digit) {
+    let stack: number[] = [];
+    for (let digit of num) {
+        while (stack.length > 0 && k > 0 && stack[stack.length - 1] > +digit) {
             stack.pop();
             k--;
         }
         stack.push(+digit);
     }
-    for(let i = 0;i<k;i++) stack.pop();
-    let ans : string = '';
-    let isHeadZero : boolean = true;
-    for(let digit of stack) {
-        if(isHeadZero && digit === 0) continue;
+    for (let i = 0; i < k; i++) stack.pop();
+    let ans: string = '';
+    let isHeadZero: boolean = true;
+    for (let digit of stack) {
+        if (isHeadZero && digit === 0) continue;
         isHeadZero = false;
         ans += digit;
     }
-    if(ans.length === 0) return '0';
+    if (ans.length === 0) return '0';
     return ans;
 };
 // @lc code=end
