@@ -54,7 +54,6 @@
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
         stack = []
-        ans = ""
         for digit in num:
             while len(stack) > 0 and k > 0 and stack[-1] > digit:
                 stack.pop()
@@ -62,14 +61,7 @@ class Solution:
             stack.append(digit)
         for _ in range(k):
             stack.pop()
-        isHeadZero = True
-        for digit in stack:
-            if isHeadZero and int(digit) == 0:
-                continue
-            isHeadZero = False
-            ans += digit
-        if len(ans) == 0:
-            return '0'
-        return ans
+        if len(stack) == 0: return "0"
+        return str(int("".join(stack)))
 
 # @lc code=end
