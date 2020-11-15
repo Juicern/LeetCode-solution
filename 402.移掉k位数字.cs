@@ -1,5 +1,6 @@
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
+
 /*
  * @lc app=leetcode.cn id=402 lang=csharp
  *
@@ -49,30 +50,32 @@ using System.Collections.Generic;
  * 
  * 
  */
-
 // @lc code=start
-public class Solution {
-    public string RemoveKdigits(string num, int k) {
+public class Solution
+{
+    public string RemoveKdigits(string num, int k)
+    {
         var stack = new LinkedList<char>();
-        foreach(var digit in num) {
-            while(stack.Any() && k > 0 && stack.Last() > digit) {
+        foreach (var digit in num)
+        {
+            while (stack.Any() && k > 0 && stack.Last() > digit)
+            {
                 stack.RemoveLast();
                 k--;
             }
-            stack.AddLast(digit);
-        }   
-        for(int i =0;i<k;i++) stack.RemoveLast();
+            stack.AddLast (digit);
+        }
+        for (int i = 0; i < k; i++) stack.RemoveLast();
         bool isLeadingZero = true;
         StringBuilder ans = new StringBuilder();
-        foreach(var digit in stack) {
-            if(isLeadingZero && digit == '0') continue;
+        foreach (var digit in stack)
+        {
+            if (isLeadingZero && digit == '0') continue;
             isLeadingZero = false;
-            ans.Append(digit);
+            ans.Append (digit);
         }
-        if(ans.Length == 0) return "0";
+        if (ans.Length == 0) return "0";
         return ans.ToString();
     }
-
 }
 // @lc code=end
-
