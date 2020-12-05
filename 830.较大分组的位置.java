@@ -71,13 +71,14 @@ class Solution {
     public List<List<Integer>> largeGroupPositions(String s) {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
         int index = 0;
-        while(index < s.length()) {
+        while (index < s.length()) {
             int start = index;
-            while(index < s.length() && s.charAt(start) == s.charAt(index)) index++;
-            if(index - start >= 3) ans.add(Arrays.asList(new Integer[]{start, index - 1}));
+            while (index < s.length() && s.charAt(start) == s.charAt(index))
+                index++;
+            if (index - start >= 3)
+                ans.add(Arrays.asList(new Integer[] { start, index - 1 }));
         }
         return ans;
     }
 }
 // @lc code=end
-

@@ -65,19 +65,21 @@
  * 
  * 
  */
-
 // @lc code=start
-public class Solution {
-    public IList<IList<int>> LargeGroupPositions(string s) {
+public class Solution
+{
+    public IList<IList<int>> LargeGroupPositions(string s)
+    {
         var ans = new List<IList<int>>();
         int index = 0;
-        while(index < s.Length) {
+        while (index < s.Length)
+        {
             int temp = index;
-            while(index < s.Length && s[index] == s[temp]) index++;
-            if(index - temp >= 3) ans.Add((new int[]{temp, index - 1}).ToList());
-        } 
+            while (index < s.Length && s[index] == s[temp]) index++;
+            if (index - temp >= 3)
+                ans.Add((new int[] { temp, index - 1 }).ToList());
+        }
         return ans;
     }
 }
 // @lc code=end
-

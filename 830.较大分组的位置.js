@@ -71,13 +71,13 @@
  * @param {string} s
  * @return {number[][]}
  */
-var largeGroupPositions = function(s) {
+var largeGroupPositions = function (s) {
     let ans = []
     let index = 0
-    while(index < s.length) {
+    while (index < s.length) {
         let start = index
-        while(index <s.length && s[start] === s[index]) index++
-        if(index - start >= 3) ans.push([start, index - 1])
+        while (index < s.length && s[start] === s[index]) index++
+        if (index - start >= 3) ans.push([start, index - 1])
     }
     return ans
 };
