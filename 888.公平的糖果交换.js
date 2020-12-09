@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-
 /*
- * @lc app=leetcode.cn id=888 lang=csharp
+ * @lc app=leetcode.cn id=888 lang=javascript
  *
  * [888] 公平的糖果交换
  *
@@ -63,19 +61,28 @@ using System.Collections.Generic;
  * 
  * 
  */
+
 // @lc code=start
-public class Solution
-{
-    public int[] FairCandySwap(int[] A, int[] B)
-    {
-        int diff = A.Sum() - B.Sum();
-        var set = new HashSet<int>(A);
-        foreach (var num in B)
-        {
-            if (set.Contains((diff + 2 * num) / 2))
-                return new int[] { (diff + 2 * num) / 2, num };
-        }
-        return new int[0];
+/**
+ * @param {number[]} A
+ * @param {number[]} B
+ * @return {number[]}
+ */
+var fairCandySwap = function (A, B) {
+    var num1 = 0
+    var num2 = 0
+    var set = new Set();
+    for (var num of B) num2 += num
+    for (var num of A) {
+        num1 += num
+        set.add(num)
     }
-}
+    for (var num of B) {
+        if (set.has((num1 - num2 + 2 * num) / 2)) {
+            return [(num1 - num2 + 2 * num) / 2, num]
+        }
+    }
+    return []
+};
 // @lc code=end
+
