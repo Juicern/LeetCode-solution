@@ -57,14 +57,14 @@
  * @return {number}
  */
 
-var pathSum = function(root, sum) {
+var pathSum = function (root, sum) {
     let ans = 0
-    var helper = function(node, pre, isFirst) {
-        if(node === null) return
-        if(node.val === pre) ans++
+    var helper = function (node, pre, isFirst) {
+        if (node === null) return
+        if (node.val === pre) ans++
         helper(node.left, pre - node.val, false)
         helper(node.right, pre - node.val, false)
-        if(isFirst) {
+        if (isFirst) {
             helper(node.left, sum, true)
             helper(node.right, sum, true)
         }
