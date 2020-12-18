@@ -1,16 +1,16 @@
 /*
- * @lc app=leetcode.cn id=48 lang=java
+ * @lc app=leetcode.cn id=48 lang=typescript
  *
  * [48] 旋转图像
  *
  * https://leetcode-cn.com/problems/rotate-image/description/
  *
  * algorithms
- * Medium (66.44%)
- * Likes:    381
+ * Medium (70.32%)
+ * Likes:    663
  * Dislikes: 0
- * Total Accepted:    59K
- * Total Submissions: 87.8K
+ * Total Accepted:    114.5K
+ * Total Submissions: 162.7K
  * Testcase Example:  '[[1,2,3],[4,5,6],[7,8,9]]'
  *
  * 给定一个 n × n 的二维矩阵表示一个图像。
@@ -60,24 +60,30 @@
  */
 
 // @lc code=start
-class Solution {
-    public void rotate(int[][] matrix) {
-        int n = matrix.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = temp;
-            }
+/**
+ Do not return anything, modify matrix in-place instead.
+ */
+function rotate(matrix: number[][]): void {
+    swapRowAndCol(matrix)
+    reverseRow(matrix)
+};
+function swapRowAndCol(matrix: number[][]): void {
+    for(let i = 1;i<matrix.length;i++) {
+        for(let j = 0;j<i;j++) {
+            let temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
         }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n / 2; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[i][n - 1 - j];
-                matrix[i][n - 1 - j] = temp;
-            }
+    }
+};
+function reverseRow(matrix: number[][]): void {
+    for(let i = 0;i<matrix.length;i++) {
+        for(let j = 0;j<matrix.length / 2;j++) {
+            let temp = matrix[i][j]
+            matrix[i][j] = matrix[i][matrix.length - j -1]
+            matrix[i][matrix.length - j -1] = temp
         }
-        return;
     }
 }
 // @lc code=end
+

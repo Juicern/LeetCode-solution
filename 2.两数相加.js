@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=2 lang=csharp
+ * @lc app=leetcode.cn id=2 lang=javascript
  *
  * [2] 两数相加
  *
@@ -27,34 +27,34 @@
  * 
  * 
  */
+
 // @lc code=start
 /**
  * Definition for singly-linked list.
- * public class ListNode {
- *     public int val;
- *     public ListNode next;
- *     public ListNode(int x) { val = x; }
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
  * }
  */
-public class Solution
-{
-    public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
-    {
-        var dummy = new ListNode(0);
-        var p = dummy;
-        int carry = 0;
-        while (l1 != null || l2 != null)
-        {
-            int sum =
-                (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + carry;
-            p.next = new ListNode(sum % 10);
-            carry = sum / 10;
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
-            p = p.next;
-        }
-        if (carry == 1) p.next = new ListNode(1);
-        return dummy.next;
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+    let carry = 0
+    let dummy = new ListNode(0)
+    let p = dummy
+    while (l1 || l2) {
+        let sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry
+        carry = Math.floor(sum / 10)
+        p.next = new ListNode(sum % 10)
+        p = p.next
+        if (l1 != null) l1 = l1.next
+        if (l2 != null) l2 = l2.next
     }
-}
+    if (carry == 1) p.next = new ListNode(1)
+    return dummy.next;
+};
 // @lc code=end
+
