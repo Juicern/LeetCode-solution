@@ -43,10 +43,8 @@ public:
         map<int, int> map;
         vector<int> ans(2, -1);
         for(int i=  0;i<nums.size();i++) {
-            if(map.count(target - nums[i]) > 0) {
-                ans[0] = i;
-                ans[1] = map[target - nums[i]]; 
-                break;
+            if(map.find(target - nums[i]) != map.end()) {
+                return {i, map[target - nums[i]]};
             }
             map[nums[i]] = i;
         }

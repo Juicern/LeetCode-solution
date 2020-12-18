@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-
 /*
- * @lc app=leetcode.cn id=1 lang=csharp
+ * @lc app=leetcode.cn id=1 lang=typescript
  *
  * [1] 两数之和
  *
@@ -30,21 +28,17 @@ using System.Collections.Generic;
  * 
  * 
  */
+
 // @lc code=start
-public class Solution
-{
-    public int[] TwoSum(int[] nums, int target)
-    {
-        var dict = new Dictionary<int, int>();
-        for (int i = 0; i < nums.Length; i++)
-        {
-            if (dict.ContainsKey(target - nums[i]))
-            {
-                return new int[] { dict[target - nums[i]], i };
-            }
-            if (!dict.ContainsKey(nums[i])) dict.Add(nums[i], i);
+function twoSum(nums: number[], target: number): number[] {
+    var map = new Map<number, number>()
+    for (let i in nums) {
+        if (map.has(target - nums[i])) {
+            return [Number(i), map.get(target - nums[i])]
         }
-        return new int[] { -1, -1 };
+        map.set(nums[i], Number(i))
     }
-}
+    return [-1, -1]
+};
 // @lc code=end
+
