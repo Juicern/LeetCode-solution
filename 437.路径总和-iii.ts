@@ -58,13 +58,13 @@
  */
 
 function pathSum(root: TreeNode | null, sum: number): number {
-    var ans : number = 0
-    var helper = function(node: TreeNode | null, pre : number, isFirst : boolean) : void {
-        if(node === null) return
-        if(node.val === pre) ans++
+    var ans: number = 0
+    var helper = function (node: TreeNode | null, pre: number, isFirst: boolean): void {
+        if (node === null) return
+        if (node.val === pre) ans++
         helper(node.left, pre - node.val, false)
         helper(node.right, pre - node.val, false)
-        if(isFirst) {
+        if (isFirst) {
             helper(node.left, sum, true)
             helper(node.right, sum, true)
         }
