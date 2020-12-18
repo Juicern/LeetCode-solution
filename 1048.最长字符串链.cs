@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+
 /*
  * @lc app=leetcode.cn id=1048 lang=csharp
  *
@@ -44,12 +48,30 @@
  * 
  * 
  */
-
 // @lc code=start
-public class Solution {
-    public int LongestStrChain(string[] words) {
-
+public class Solution
+{
+    public int LongestStrChain(string[] words)
+    {
+        var dp = new Dictionary<string, int>();
+        words = words.OrderBy(x => x.Length).ToArray();
+        int ans = 0;
+        foreach (var word in words)
+        {
+            int best = 0;
+            for (int i = 0; i < word.Length; i++)
+            {
+                string prev = word.Substring(0, i) + word.Substring(i + 1);
+                best =
+                    Math.Max(best, (dp.ContainsKey(prev) ? dp[prev] : 0) + 1);
+            }
+            if (dp.ContainsKey(word))
+                dp[word] = best;
+            else
+                dp.Add(word, best);
+            ans = Math.Max(ans, best);
+        }
+        return ans;
     }
 }
 // @lc code=end
-
