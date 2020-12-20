@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using System.Text;
 /*
- * @lc app=leetcode.cn id=1081 lang=csharp
+ * @lc app=leetcode.cn id=1081 lang=typescript
  *
  * [1081] 不同字符的最小子序列
  *
@@ -59,26 +57,21 @@ using System.Text;
  */
 
 // @lc code=start
-public class Solution {
-    public string SmallestSubsequence(string s) {
-       var counts = new int[26];
-        var set = new HashSet<char>();
-        var ans = new Stack<char>();
-        foreach(var letter in s) {
-            counts[letter - 'a']++;
-        }
-        foreach(var letter in s) {
-            if(!set.Contains(letter)) {
-                while(ans.Any() && ans.Peek() > letter && counts[ans.Peek() - 'a']  > 0) {
-                    set.Remove(ans.Pop());
-                }
-                ans.Push(letter);
-                set.Add(letter);
+function smallestSubsequence(s: string): string {
+    let counts = _.countBy(s)
+    let set = new Set()
+    let ans = []
+    for (let letter of s) {
+        if (!set.has(letter)) {
+            while (ans.length > 0 && ans[ans.length - 1] > letter && counts[ans[ans.length - 1]] > 0) {
+                set.delete(ans.pop())
             }
-            counts[letter - 'a']--;
+            ans.push(letter)
+            set.add(letter)
         }
-        return string.Join("", ans.Reverse()); 
+        counts[letter]--
     }
-}
+    return ans.join('')
+};
 // @lc code=end
 

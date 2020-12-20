@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using System.Text;
 /*
- * @lc app=leetcode.cn id=1081 lang=csharp
+ * @lc app=leetcode.cn id=1081 lang=cpp
  *
  * [1081] 不同字符的最小子序列
  *
@@ -59,26 +57,33 @@ using System.Text;
  */
 
 // @lc code=start
-public class Solution {
-    public string SmallestSubsequence(string s) {
-       var counts = new int[26];
-        var set = new HashSet<char>();
-        var ans = new Stack<char>();
-        foreach(var letter in s) {
+class Solution
+{
+public:
+    string smallestSubsequence(string s)
+    {
+        int counts[26];
+        unordered_set<char> set;
+        string ans;
+        for (auto letter : s)
+        {
             counts[letter - 'a']++;
         }
-        foreach(var letter in s) {
-            if(!set.Contains(letter)) {
-                while(ans.Any() && ans.Peek() > letter && counts[ans.Peek() - 'a']  > 0) {
-                    set.Remove(ans.Pop());
+        for (auto letter : s)
+        {
+            if (set.find(letter) == set.end())
+            {
+                while (ans.size() > 0 && ans.back() > letter && counts[ans.back() - 'a'] > 0)
+                {
+                    set.erase(ans.back());
+                    ans.pop_back();
                 }
-                ans.Push(letter);
-                set.Add(letter);
+                set.insert(letter);
+                ans.push_back(letter);
             }
             counts[letter - 'a']--;
         }
-        return string.Join("", ans.Reverse()); 
+        return ans;
     }
-}
+};
 // @lc code=end
-
