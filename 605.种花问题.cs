@@ -41,18 +41,22 @@
  * 
  * 
  */
-
 // @lc code=start
-public class Solution {
-    public bool CanPlaceFlowers(int[] flowerbed, int n) {
-        for(int i = 0;i<flowerbed.Length;i+=2) {
-            if(flowerbed[i] == 0) {
-                if(i == flowerbed.Length - 1 || flowerbed[i + 1] == 0) n--;
-                else i++;
+public class Solution
+{
+    public bool CanPlaceFlowers(int[] flowerbed, int n)
+    {
+        for (int i = 0; i < flowerbed.Length; i += 2)
+        {
+            if (flowerbed[i] == 0)
+            {
+                if (i == flowerbed.Length - 1 || flowerbed[i + 1] == 0)
+                    n--;
+                else
+                    i++;
             }
         }
         return n <= 0;
     }
 }
 // @lc code=end
-
