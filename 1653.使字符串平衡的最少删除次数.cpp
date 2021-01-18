@@ -52,29 +52,33 @@
  */
 
 // @lc code=start
-#include<string>
-#include<stack>
+#include <string>
+#include <stack>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int minimumDeletions(string s) {
+    int minimumDeletions(string s)
+    {
         int ans = 0;
-        stack<bool> st;
-        for (const auto &letter : s) 
+        int count = 0; // count of 'b' before current
+        for (const auto &letter : s)
         {
-            if (letter == 'a') {
-                if (st.size() > 0) {
-                    st.pop();
+            if (letter == 'a')
+            {
+                if (count > 0)
+                {
                     ans++;
+                    count--;
                 }
             }
-            else  {
-                st.push(true);
+            else
+            {
+                count++;
             }
-        }        
+        }
         return ans;
     }
 };
 // @lc code=end
-
