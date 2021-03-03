@@ -62,15 +62,13 @@ using namespace std;
 class Solution {
 public:
     int minFlipsMonoIncr(string S) {
-        int n = S.size();
-        vector<pair<int, int>> dp(n);
-        if (S[0] == '1') dp[0] = {1, 0};
-        else dp[0] = {0, 1};
-        for (int i = 1; i < n; ++i) {
-            dp[i].first = dp[i - 1].first + S[i] - '0';
-            dp[i].second = min(dp[i - 1].first, dp[i - 1].second) + '1' - S[i];
+        int len = 0;
+        int ans = 0;
+        for (const auto ch : S) {
+            ans = min(ans, len) + '1'- ch;
+            len += ch - '0';
         }
-        return min(dp[n - 1].first, dp[n - 1].second);
+        return min(ans, len);
     }
 };
 // @lc code=end
