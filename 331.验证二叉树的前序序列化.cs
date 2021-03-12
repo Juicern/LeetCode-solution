@@ -53,20 +53,21 @@
 // @lc code=start
 public class Solution {
     public bool IsValidSerialization(string preorder) {
-        int numCount = 0, endCount = 0; //记录非空结点数与空结点（即#，代表叶子结点）数
-
-        for(int i = 0; i < preorder.Length; i++)
-        {
-            if(preorder[i] == ',' && preorder[i - 1] != '#')    //逗号前不为#，则结点数+1
-                numCount++;
-            else if(preorder[i] == '#')
-            {
-                if(++endCount >= numCount + 1 && i != preorder.Length - 1)  //二叉树的“空结点位置”已经全部占满但序列并未结束，说明该序列不能代表二叉树
-                    return false;
+        int count = 0;
+        var array = preorder.Split(",");
+        for(int i = 0; i < array.Length;++i){
+            var str = array[i]; 
+            switch(str) {
+                case "#":
+                    ++count;
+                    if (count >= 1 && i != array.Length - 1) return false;
+                    break;
+                default:
+                    --count;
+                    break;
             }
         }
-
-        return endCount == numCount + 1;    //一个二叉树空结点（即叶子结点）数应该等于非空结点数 + 1
+        return count == 1;
     }
 }
 
