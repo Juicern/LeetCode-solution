@@ -51,23 +51,27 @@
  */
 
 // @lc code=start
-public class Solution {
-    public bool IsValidSerialization(string preorder) {
+public class Solution
+{
+    public bool IsValidSerialization(string preorder)
+    {
+        if (preorder == "#") return true;
+        if (preorder[preorder.Length - 1] != '#') return false;
         int count = 0;
-        var array = preorder.Split(",");
-        for(int i = 0; i < array.Length;++i){
-            var str = array[i]; 
-            switch(str) {
+        foreach (var str in preorder.Substring(0, preorder.Length - 2).Split(","))
+        {
+            switch (str)
+            {
                 case "#":
                     ++count;
-                    if (count >= 1 && i != array.Length - 1) return false;
+                    if (count >= 1) return false;
                     break;
                 default:
                     --count;
                     break;
             }
         }
-        return count == 1;
+        return count == 0;
     }
 }
 
