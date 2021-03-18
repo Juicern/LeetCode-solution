@@ -71,22 +71,19 @@
  */
 
 // @lc code=start
-using System;
-using System.Collections.Generic;
 public class LRUCache {
-    Dictionary<int, int> dict;
     LinkedList<int> nums;
     int capacity;
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        dict = new Dictionary<int, int>();
         nums = new LinkedList<int>();
     }
     
     public int Get(int key) {
-        if (dict.ContainsKey(key)) {
-            nums.Remove(key);
-            nums.AddLast(key);
+        if (nums.ContainsKey(key)) {
+            nums.Remove(nodes[key]);
+            var node = nums.AddLast(key);
+            nodes[key] = node;
             return dict[key];
         }
         return -1;
@@ -94,20 +91,24 @@ public class LRUCache {
     
     public void Put(int key, int value) {
         if (dict.ContainsKey(key)) {
-            nums.Remove(key);
-            nums.AddLast(key);
+            nums.Remove(nodes[key]);
+            var node = nums.AddLast(key);
+            nodes[key] = node;
             dict[key] = value;
         }
         else {
             if (nums.Count == capacity) {
                 dict.Remove(nums.First.Value);
+                nodes.Remove(nums.First.Value);
                 nums.RemoveFirst();
-                nums.AddLast(key);
+                var node = nums.AddLast(key);
                 dict.Add(key, value);
+                nodes.Add(key, node);
             }
             else {
-                nums.AddLast(key);
+                var node = nums.AddLast(key);
                 dict.Add(key, value);
+                nodes.Add(key, node);
             }
         }
     }
