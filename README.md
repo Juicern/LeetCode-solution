@@ -1,12 +1,10 @@
 # LeetCode-solution
-solution多为C#,辅以Python，C++，Javascript，Java
+solution多為C#和Go，輔以Python，C++，Javascript，Java
 
-Java这么多的原因是之前还没转行...都用Java来写题解了
+別問為什麼這麼亂，不用資料夾分層整理
 
-别问为什么这么乱，不用文件夹分层整理
+別問為什麼沒有註釋，沒有詳細解析
 
-别问为什么没有注释，没有详细解析
+別問為什麼只上傳了這麼點
 
-别问为什么只上传了这么点
-
-> 因为懒
+> 因為懶
